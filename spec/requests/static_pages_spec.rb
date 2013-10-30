@@ -1,14 +1,17 @@
 require 'spec_helper'
 
 describe "StaticPages" do
-	let(:base_title) {"Inventory System |"}
+	let(:base_title) {"Inventory System"}
 	describe "Home page" do
 		before { visit '/static_pages/home'}
 		it "should have the h1 'Inventory System'" do
 			page.should have_selector('h1', :text => 'Inventory System')
 		end
 		it "should have the right title" do
-			page.should have_selector('title', :text => "#{base_title} Home")
+			page.should have_selector('title', :text => "#{base_title}")
+		end
+		it "should not have a custom page title" do
+			page.should_not have_selector('title', :text => '| Home')
 		end
 	end
 	describe "Help Page" do
@@ -17,7 +20,7 @@ describe "StaticPages" do
 			page.should have_selector('h1',:text => 'Help')
 		end
 		it "should have the right title" do
-			page.should have_selector('title', :text => "#{base_title} Help")
+			page.should have_selector('title', :text => "#{base_title} | Help")
 		end
 	end
 	describe "About Page" do
@@ -26,7 +29,7 @@ describe "StaticPages" do
 			page.should have_selector('h1',:text => 'About')
 		end
 		it "should have the right title" do
-			page.should have_selector('title', :text => "#{base_title} About")
+			page.should have_selector('title', :text => "#{base_title} | About")
 		end
 	end
 end
